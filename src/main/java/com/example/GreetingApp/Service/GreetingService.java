@@ -1,10 +1,11 @@
-package com.example.greetingApp.Service;
+package com.example.GreetingApp.Service;
 
 import org.springframework.stereotype.Service;
-import com.example.greetingApp.Model.Greeting;
-import com.example.greetingApp.Repository.GreetingRepository;
+import com.example.GreetingApp.Model.Greeting;
+import com.example.GreetingApp.Repository.GreetingRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GreetingService {
@@ -32,12 +33,16 @@ public class GreetingService {
 
         Greeting greeting = new Greeting(message);
         return greetingRepository.save(greeting); // Save to DB
-
-
-
     }
 
     public List<Greeting> getAllGreetings() {
         return greetingRepository.findAll();
+    }
+
+    /**
+     * Retrieves a greeting message by its ID.
+     */
+    public Optional<Greeting> getGreetingById(Long id) {
+        return greetingRepository.findById(id);
     }
 }
