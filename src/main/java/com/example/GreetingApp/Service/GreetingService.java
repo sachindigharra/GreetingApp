@@ -1,26 +1,43 @@
-package com.example.GreetingApp.Service;
+package com.example.greetingApp.Service;
 
 import org.springframework.stereotype.Service;
+import com.example.greetingApp.Model.Greeting;
+import com.example.greetingApp.Repository.GreetingRepository;
+
+import java.util.List;
 
 @Service
 public class GreetingService {
 
+    private final GreetingRepository greetingRepository;
+
+    public GreetingService(GreetingRepository greetingRepository) {
+        this.greetingRepository = greetingRepository;
+    }
+
     /**
-     * Generates a greeting message based on the provided user attributes.
-     *
-     * @param firstName User's first name (optional)
-     * @param lastName  User's last name (optional)
-     * @return Personalized greeting message
+     * Generates and saves a greeting message based on the user input.
      */
-    public String getGreetingMessage(String firstName, String lastName) {
+    public Greeting saveGreeting(String firstName, String lastName) {
+        String message;
         if (firstName != null && lastName != null) {
-            return "Hello, " + firstName + " " + lastName + "!";
+            message = "Hello, " + firstName + " " + lastName + "!";
         } else if (firstName != null) {
-            return "Hello, " + firstName + "!";
+            message = "Hello, " + firstName + "!";
         } else if (lastName != null) {
-            return "Hello, " + lastName + "!";
+            message = "Hello, " + lastName + "!";
         } else {
-            return "Hello, World!";
+            message = "Hello, World!";
         }
+
+        Greeting greeting = new Greeting(message);
+        return greetingRepository.save(greeting); // Save to DB
+
+
+
+    }
+
+    public List<Greeting> getAllGreetings() {
+        return greetingRepository.findAll();
     }
 }

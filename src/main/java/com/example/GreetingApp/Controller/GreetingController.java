@@ -1,9 +1,9 @@
 package com.example.GreetingApp.Controller;
 
 import org.springframework.web.bind.annotation.*;
-
-import com.example.GreetingApp.Service.GreetingService;
-import com.example.GreetingApp.Model.Greeting;
+import com.example.greetingApp.Service.GreetingService;
+import com.example.greetingApp.Model.Greeting;
+import java.util.List;
 
 /**
  * GreetingController handles HTTP requests for greeting messages.
@@ -19,22 +19,26 @@ public class GreetingController {
     }
 
     /**
-     * Handles GET requests to generate a greeting message.
+     * Saves a greeting message based on user input.
      *
-     * @param firstName Optional first name query parameter
-     * @param lastName  Optional last name query parameter
-     * @return A Greeting object containing the personalized greeting message.
-     *
-     * Example Requests:
-     * - `curl -X GET "http://localhost:8080/greetings"` → "Hello, World!"
-     * - `curl -X GET "http://localhost:8080/greetings?firstName=John"` → "Hello, John!"
-     * - `curl -X GET "http://localhost:8080/greetings?lastName=Doe"` → "Hello, Doe!"
-     * - `curl -X GET "http://localhost:8080/greetings?firstName=John&lastName=Doe"` → "Hello, John Doe!"
+     * Example:
+     * - `curl -X POST "http://localhost:8080/greetings?firstName=John&lastName=Doe"`
      */
-    @GetMapping
-    public Greeting getGreeting(
+    @PostMapping
+    public Greeting saveGreeting(
             @RequestParam(required = false) String firstName,
             @RequestParam(required = false) String lastName) {
-        return new Greeting(greetingService.getGreetingMessage(firstName, lastName));
+        return greetingService.saveGreeting(firstName, lastName);
+    }
+
+    /**
+     * Retrieves all saved greetings.
+     *
+     * Example:
+     * - `curl -X GET "http://localhost:8080/greetings"`
+     */
+    @GetMapping
+    public List<Greeting> getAllGreetings() {
+        return greetingService.getAllGreetings();
     }
 }
