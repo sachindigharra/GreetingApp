@@ -37,6 +37,7 @@ public class GreetingController {
      *
      * Example:
      * - `curl -X GET "http://localhost:8080/greetings"`
+     *  new method for get all ids
      */
     @GetMapping
     public List<Greeting> getAllGreetings() {
