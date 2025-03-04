@@ -54,4 +54,18 @@ public class GreetingController {
     public Optional<Greeting> getGreetingById(@PathVariable Long id) {
         return greetingService.getGreetingById(id);
     }
+
+    /**
+     * Updates an existing greeting message.
+     *
+     * Example:
+     * - `curl -X PUT "http://localhost:8080/greetings/{id}?firstName=John&lastName=Doe"`
+     */
+    @PutMapping("/{id}")
+    public Greeting updateGreeting(@PathVariable Long id,
+                                   @RequestParam(required = false) String firstName,
+                                   @RequestParam(required = false) String lastName) {
+        return greetingService.updateGreeting(id, firstName, lastName);
+    }
+
 }
