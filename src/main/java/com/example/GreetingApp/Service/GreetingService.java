@@ -67,4 +67,14 @@ public class GreetingService {
         existingGreeting.setMessage(message);
         return greetingRepository.save(existingGreeting);
     }
+
+    /**
+     * Deletes a greeting message by its ID.
+     */
+    public void deleteGreeting(Long id) {
+        Greeting existingGreeting = greetingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Greeting not found with ID: " + id));
+
+        greetingRepository.delete(existingGreeting);
+    }
 }

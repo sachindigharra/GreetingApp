@@ -68,4 +68,15 @@ public class GreetingController {
         return greetingService.updateGreeting(id, firstName, lastName);
     }
 
+    /**
+     * Deletes a greeting message by its ID.
+     *
+     * Example:
+     * - `curl -X DELETE "http://localhost:8080/greetings/{id}"`
+     */
+    @DeleteMapping("/{id}")
+    public void deleteGreeting(@PathVariable Long id) {
+        greetingService.deleteGreeting(id);
+    }
+
 }
