@@ -2,6 +2,7 @@ package com.example.GreetingApp.Controller;
 
 import com.example.GreetingApp.Model.AuthUser;
 import com.example.GreetingApp.Service.AuthenticationService;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,4 +37,5 @@ public class AuthUserController {
 
         return ResponseEntity.ok(Map.of("message", "Login successful!", "token", token));
     }
+
 }
