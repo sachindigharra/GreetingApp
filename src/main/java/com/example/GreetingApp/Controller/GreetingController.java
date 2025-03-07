@@ -13,7 +13,7 @@ import java.util.Optional;
 @RequestMapping("/greetings")
 public class GreetingController {
 
-    private final GreetingService greetingService;
+     GreetingService greetingService;
 
     public GreetingController(GreetingService greetingService) {
         this.greetingService = greetingService;
@@ -39,7 +39,7 @@ public class GreetingController {
      * - `curl -X GET "http://localhost:8080/greetings"`
      *  new method for get all ids
      */
-    @GetMapping
+    @GetMapping("/greetings")
     public List<Greeting> getAllGreetings() {
         return greetingService.getAllGreetings();
     }
